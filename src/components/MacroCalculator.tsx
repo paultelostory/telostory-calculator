@@ -38,7 +38,7 @@ const MacroCalculator = () => {
       heavy: 1.725
     };
 
-    let tdee = bmr * activityMultipliers[calculatorData.activity as keyof typeof activityMultipliers];
+    const tdee = bmr * activityMultipliers[calculatorData.activity as keyof typeof activityMultipliers];
 
     let calories = tdee;
     if (calculatorData.goal === 'cutting') {
