@@ -24,25 +24,29 @@ const MacroCalculator = () => {
     const weightKg = parseFloat(calculatorData.weight) * 0.453592;
     const ageNum = parseFloat(calculatorData.age);
 
-    const bmr = calculatorData.gender === 'male'
-      ? (10 * weightKg + 6.25 * heightCm - 5 * ageNum + 5)
-      : (10 * weightKg + 6.25 * heightCm - 5 * ageNum - 161);
+    // Using let for variables that need reassignment
+    let bmr = 0;
+    if (calculatorData.gender === 'male') {
+      bmr = 10 * weightKg + 6.25 * heightCm - 5 * ageNum + 5;
+    } else {
+      bmr = 10 * weightKg + 6.25 * heightCm - 5 * ageNum - 161;
+    }
 
     const activityMultipliers = {
       sedentary: 1.2,
       light: 1.375,
       moderate: 1.55,
       heavy: 1.725
-    } as const;
+    };
 
-    const tdee = bmr * activityMultipliers[calculatorData.activity as keyof typeof activityMultipliers];
+    let tdee = bmr * activityMultipliers[calculatorData.activity as keyof typeof activityMultipliers];
+    let calories = tdee;
 
-    const baseCalories = tdee;
-    const calories = calculatorData.goal === 'cutting' 
-      ? baseCalories - 500 
-      : calculatorData.goal === 'bulking'
-        ? baseCalories + 500
-        : baseCalories;
+    if (calculatorData.goal === 'cutting') {
+      calories = tdee - 500;
+    } else if (calculatorData.goal === 'bulking') {
+      calories = tdee + 500;
+    }
 
     const protein = parseFloat(calculatorData.weight);
     const fat = (calories * 0.25) / 9;
