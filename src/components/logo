@@ -1,0 +1,13 @@
+import React from 'react';
+
+const Logo = () => (
+  <svg viewBox="0 0 400 100" className="h-16 mx-auto mb-2">
+    <g fill="white">
+      <path d="M200 20 L160 80 L240 80 Z" />
+      <path d="M160 30 L120 80 L200 80 Z" />
+      <path d="M240 40 L200 80 L280 80 Z" />
+    </g>
+  </svg>
+);
+
+export default Logo;
